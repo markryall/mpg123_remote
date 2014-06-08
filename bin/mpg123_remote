@@ -4,4 +4,4 @@ $:.unshift File.dirname(__FILE__)+'/../lib'
 
 require 'mpg123_remote'
 
-Mpg123Remote::Player.new.play ARGV.shift
+Mpg123Remote::Player.new.execute *ARGV

@@ -13,14 +13,14 @@ In one console:
 
 In another:
 
-    mpg123play track01.mp3
-    mpg123playstream 'http://somafm.com/startstream=secretagent.pls'
-    mpg123stop
-    mpg123pause
-    mpg123speed +20
-    mpg123speed -20
-    mpg123volume +50
-    mpg123volume -50
+    mpg123_remote load track01.mp3
+    mpg123_remote pause
+    mpg123_remote stop
+    mpg123_remote pitch +0.20
+    mpg123_remote pitch -0.20
+    mpg123_remote volume 20
+    mpg123_remote volume 80
+    mpg123_somafm secretagent
 
 ## Contributing
 

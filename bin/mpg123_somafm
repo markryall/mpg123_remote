@@ -4,4 +4,4 @@ $:.unshift File.dirname(__FILE__)+'/../lib'
 
 require 'mpg123_remote'
 
-Mpg123Remote::Player.new.pause
+Mpg123Remote::Player.new.somafm ARGV.shift

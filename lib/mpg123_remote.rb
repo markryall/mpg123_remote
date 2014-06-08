@@ -5,19 +5,13 @@ class Mpg123Remote::Player
     @path = path
   end
 
-  def pause
-    execute 'PAUSE'
+  def somafm station='secretagent'
+    execute 'loadlist', 0, "http://somafm.com/startstream=#{station}.pls"
   end
 
-  def play path
-    execute "LOAD #{path}"
-  end
-
-private
-
-  def execute command
+  def execute *args
     File.open(@path, 'w') do |f|
-      f.puts command
+      f.puts args.join ' '
     end
   end
 end
