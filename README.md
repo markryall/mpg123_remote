@@ -16,7 +16,7 @@ On mac os x using homebrew, run:
 
 In one console:
 
-    (mpg123 --remote --fifo /tmp/mpg123in 2> /dev/null > /tmp/mpg123out &) && bin/mpg123_parse
+    (mpg123 --remote --fifo /tmp/mpg123in 2> /dev/null > /tmp/mpg123out &) && mpg123_parse
 
 This console will now show the current player status, current track, seconds remaining, etc.
 
