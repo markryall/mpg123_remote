@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+File.open('/tmp/mpg123in', 'w') do |f|
+  f.puts "LOAD #{ARGV.shift}"
+end

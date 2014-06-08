@@ -1,10 +1,12 @@
 #!/usr/bin/env ruby
 
 class Console
+  LENGTH=50
+
   def write s
-    print ("\b"*@last.length) if @last
-    @last=s
-    print s
+    print "\b" * LENGTH unless @first
+    @first = false
+    print s.rjust LENGTH
   end
 end
 
