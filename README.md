@@ -1,24 +1,26 @@
 # Mpg123Remote
 
-TODO: Write a gem description
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'mpg123_remote'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install mpg123_remote
+This is a set of console commands to simplify remote interaction with mpg123.
 
 ## Usage
 
-TODO: Write usage instructions here
+In one console:
+
+    mkfifo /tmp/mpg123in
+    mkfifo /tmp/mpg123out
+    mpg123 --remote --fifo /tmp/mpg123in 2> /dev/null > /tmp/mpg123out &
+    mpg123parse &
+
+In another:
+
+    mpg123play track01.mp3
+    mpg123playstream 'http://somafm.com/startstream=secretagent.pls'
+    mpg123stop
+    mpg123pause
+    mpg123speed +20
+    mpg123speed -20
+    mpg123volume +50
+    mpg123volume -50
 
 ## Contributing
 

@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+class Console
+  def write s
+    print ("\b"*@last.length) if @last
+    @last=s
+    print s
+  end
+end
+
+console = Console.new
+
+File.open('/tmp/mpg123out') do |f|
+  while line=f.gets
+    case line
+    when /^@F (\d+) (\d+) ([\d\.]+) ([\d\.]+)$/
+      frames, frames_left, seconds, seconds_left = $1, $2, $3, $4
+      console.write "#{seconds} seconds (#{seconds_left} remaining)"
+    end
+  end
+end
