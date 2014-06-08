@@ -3,10 +3,16 @@
 class Console
   LENGTH=50
 
-  def write s
+  def change s
     print "\b" * LENGTH unless @first
     @first = false
     print s.rjust LENGTH
+  end
+
+  def write s
+    puts unless @first
+    @first = true
+    puts s
   end
 end
 
@@ -17,7 +23,10 @@ File.open('/tmp/mpg123out') do |f|
     case line
     when /^@F (\d+) (\d+) ([\d\.]+) ([\d\.]+)$/
       frames, frames_left, seconds, seconds_left = $1, $2, $3, $4
-      console.write "#{seconds} seconds (#{seconds_left} remaining)"
+      console.change "#{seconds} seconds (#{seconds_left} remaining)"
+    when /@I ICY-META: StreamTitle='(.*) - (.*)';StreamUrl='http:\/\/SomaFM.com\/(.*)\/';/
+      artist, track, station = $1, $2, $3
+      console.write "#{track} by #{artist} (#{station} on somafm)"
     else
       File.open('debug.log', 'w+') {|d| d.puts line } if ENV['DEBUG']
     end
