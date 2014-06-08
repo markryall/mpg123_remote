@@ -1,36 +1,12 @@
 #!/usr/bin/env ruby
 
-class Console
-  LENGTH=50
+$:.unshift File.dirname(__FILE__)+'/../lib'
 
-  def change s
-    print "\b" * LENGTH unless @first
-    @first = false
-    print s.rjust LENGTH
-  end
+require 'mpg123_remote'
 
-  def write s
-    puts unless @first
-    @first = true
-    puts s
-  end
-end
+parser = Mpg123Remote::Parser.new Mpg123Remote::Console.new
 
-console = Console.new
-
-File.open('/tmp/mpg123out') do |f|
-  while line=f.gets
-    case line
-    when /^@F (\d+) (\d+) ([\d\.]+) ([\d\.]+)$/
-      frames, frames_left, seconds, seconds_left = $1, $2, $3, $4
-      console.change "#{seconds} seconds (#{seconds_left} remaining)"
-    when /@I ICY-META: StreamTitle='(.*) - (.*)';StreamUrl='http:\/\/SomaFM.com\/(.*)\/';/
-      artist, track, station = $1, $2, $3
-      console.write "#{track} by #{artist} (#{station} on somafm)"
-    when /@P (\d)/
-      File.open('/tmp/mpg123state', 'w') {|s| s.puts $1 }
-    else
-      File.open('debug.log', 'w+') {|d| d.puts line } if ENV['DEBUG']
-    end
-  end
+begin
+  parser.parse
+rescue Interrupt
 end
