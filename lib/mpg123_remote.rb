@@ -5,7 +5,8 @@ class Mpg123Remote::Player
     @path = path
   end
 
-  def somafm station='secretagent'
+  def somafm station
+    station ||= 'secretagent'
     execute 'loadlist', 0, "http://somafm.com/startstream=#{station}.pls"
   end
 
