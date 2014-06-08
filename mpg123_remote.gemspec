@@ -8,9 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Mpg123Remote::VERSION
   spec.authors       = ["Mark Ryall"]
   spec.email         = ["mark@ryall.name"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.summary       = %q{simple remote control for mpg123}
+  spec.homepage      = "http://github.com/markryall/mpg123_remote"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
