@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+unless File.exist? '/tmp/mpg123state'
+  puts 0
+  exit
+end
+
+File.open('/tmp/mpg123state') do |f|
+  puts f.gets
+end
