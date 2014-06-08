@@ -22,13 +22,32 @@ This console will now show the current player status, current track, seconds rem
 
 The player can now be controller from any other console with the following commands:
 
-    mpg123_remote load track01.mp3
+### Play a track in current directory
+
+    mpg123_play track01.mp3
+
+### pause or unpause player
+
     mpg123_remote pause
+
+### stop the player
+
     mpg123_remote stop
-    mpg123_remote pitch +0.20
-    mpg123_remote pitch -0.20
+
+### change volume
+
+    mpg123_remote volume 0
     mpg123_remote volume 20
     mpg123_remote volume 80
+    mpg123_remote volume 100
+
+### control pitch (speed)
+
+    mpg123_remote pitch +0.20
+    mpg123_remote pitch -0.20
+
+### stream soma.fm channel
+
     mpg123_somafm secretagent
 
 ## Contributing
