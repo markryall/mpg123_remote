@@ -2,16 +2,25 @@
 
 This is a set of console commands to simplify remote interaction with mpg123.
 
+## Preparation
+
+This requires that mpg123 is installed and some fifo pipes have been created.
+
+On mac os x using homebrew, run:
+
+    brew install mpg123
+    mkfifo /tmp/mpg123in
+    mkfifo /tmp/mpg123out   
+
 ## Usage
 
 In one console:
 
-    mkfifo /tmp/mpg123in
-    mkfifo /tmp/mpg123out
-    mpg123 --remote --fifo /tmp/mpg123in 2> /dev/null > /tmp/mpg123out &
-    mpg123parse &
+    (mpg123 --remote --fifo /tmp/mpg123in 2> /dev/null > /tmp/mpg123out &) && bin/mpg123_parse
 
-In another:
+This console will now show the current player status, current track, seconds remaining, etc.
+
+The player can now be controller from any other console with the following commands:
 
     mpg123_remote load track01.mp3
     mpg123_remote pause
