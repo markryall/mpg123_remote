@@ -16,6 +16,8 @@ File.open('/tmp/mpg123out') do |f|
     when /^@F (\d+) (\d+) ([\d\.]+) ([\d\.]+)$/
       frames, frames_left, seconds, seconds_left = $1, $2, $3, $4
       console.write "#{seconds} seconds (#{seconds_left} remaining)"
+    else
+      File.open('debug.log', 'w+') {|d| d.puts line } if ENV['DEBUG']
     end
   end
 end
