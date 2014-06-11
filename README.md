@@ -46,6 +46,19 @@ The player can now be controller from any other console with the following comma
     mpg123_remote pitch +0.20
     mpg123_remote pitch -0.20
 
+### control equaliser
+
+mpg123 has a 32 band equaliser for each channel (left and right)
+
+The eq command takes parameters:
+
+* <channel> 1 (left), 2 (right) or 3 (both) 
+* <band> 0-31
+* <value> 1
+
+    mpg123_remote eq 3 0 1.5
+    mpg123_remote eq 3 31 0.5
+
 ### stream soma.fm channel
 
     mpg123_somafm secretagent
