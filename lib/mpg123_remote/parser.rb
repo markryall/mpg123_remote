@@ -1,8 +1,8 @@
 class Mpg123Remote::Parser
-  attr_reader :console
+  attr_reader :console, :announcer
 
-  def initialize console, path='/tmp/mpg123out'
-    @console, @path = console, path
+  def initialize console, announcer, path='/tmp/mpg123out'
+    @console, @announcer, @path = console, announcer, path
   end
 
   def parse
@@ -21,6 +21,7 @@ class Mpg123Remote::Parser
     when /@I ICY-META: StreamTitle='(.*) - (.*)';StreamUrl='http:\/\/SomaFM.com\/(.*)\/';/
       artist, track, station = $1, $2, $3
       console.write "#{track} by #{artist} (#{station} on somafm)"
+      announcer.announce "#{track} by #{artist}"
     when /@P (\d)/
       File.open('/tmp/mpg123state', 'w') {|s| s.puts $1 }
     else

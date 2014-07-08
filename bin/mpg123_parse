@@ -4,7 +4,7 @@ $:.unshift File.dirname(__FILE__)+'/../lib'
 
 require 'mpg123_remote'
 
-parser = Mpg123Remote::Parser.new Mpg123Remote::Console.new
+parser = Mpg123Remote::Parser.new Mpg123Remote::Console.new, Mpg123Remote::Announcer.new
 
 begin
   parser.parse
