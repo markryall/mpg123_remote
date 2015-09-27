@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+
+require 'redis'
+require 'pathname'
+
+class Publisher
+  attr_reader :redis
+
+  def initialize
+    @redis = Redis.new
+  end
+
+  def enqueue path
+    Pathname.new(path).find do |p|
+      push p if audio?(p)
+    end
+  end
+
+  private
+
+  def push p
+    redis.publish 'music', "QUEUE #{p}"
+  end
+
+  def audio? p
+    p.file? && p.extname == '.mp3'
+  end
+end
+
+publisher = Publisher.new
+ARGV.each { |path| publisher.enqueue path }

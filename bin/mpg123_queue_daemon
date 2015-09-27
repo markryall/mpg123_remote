@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+require 'redis'
+
+tracks = []
+
+begin
+  Redis.new(timeout: 0).subscribe('music') do |on|
+    on.message do |channel, message|
+      case message
+      when /^QUEUE (.*)$/
+        tracks << $1
+        puts "enqueued #{$1} (#{tracks.length} in queue)"
+      else
+        puts "Unknown message: #{message}"
+      end
+    end
+  end
+rescue Interrupt
+  puts 'shutting down'
+end

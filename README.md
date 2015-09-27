@@ -10,7 +10,7 @@ On mac os x using homebrew, run:
 
     brew install mpg123
     mkfifo /tmp/mpg123in
-    mkfifo /tmp/mpg123out   
+    mkfifo /tmp/mpg123out
 
 ## Usage
 
