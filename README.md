@@ -52,7 +52,7 @@ mpg123 has a 32 band equaliser for each channel (left and right)
 
 The eq command takes parameters:
 
-* <channel> 1 (left), 2 (right) or 3 (both) 
+* <channel> 1 (left), 2 (right) or 3 (both)
 * <band> 0-31
 * <value> 1
 
@@ -62,6 +62,20 @@ The eq command takes parameters:
 ### stream soma.fm channel
 
     mpg123_somafm secretagent
+
+### queue manager
+
+To queue music, you first need to run redis and the queue daemon:
+
+    brew install redis
+    redis-server /usr/local/etc/redis.conf
+    bin/mpg123_queue_daemon
+
+Now you can enqueue any number of files or directories containing music:
+
+    bin/mpg123_queue ~/Music ~/Downloads/Music
+
+The `mpg123_parse` application sends notifications to the queue daemon process when the player is started and paused.  When a track finishes and there is music in the queue, the queue daemon process will automatically start the next track.
 
 ## Contributing
 

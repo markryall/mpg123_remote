@@ -1,31 +1,11 @@
 #!/usr/bin/env ruby
 
-require 'redis'
-require 'pathname'
+$:.unshift File.dirname(__FILE__)+'/../lib'
 
-class Publisher
-  attr_reader :redis
+require 'mpg123_remote'
 
-  def initialize
-    @redis = Redis.new
-  end
+notifier = Mpg123Remote::Notifier.new
 
-  def enqueue path
-    Pathname.new(path).find do |p|
-      push p if audio?(p)
-    end
-  end
-
-  private
-
-  def push p
-    redis.publish 'music', "QUEUE #{p}"
-  end
-
-  def audio? p
-    p.file? && p.extname == '.mp3'
-  end
+ARGV.each do |path|
+  notifier.enqueue path
 end
-
-publisher = Publisher.new
-ARGV.each { |path| publisher.enqueue path }
